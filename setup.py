@@ -81,6 +81,9 @@ def get_include_dirs():
     if get_build_platform().startswith("linux"):
         include_dirs.append('/usr/include')
 
+    if get_build_platform().startswith("macosx"):
+        include_dirs.append('/opt/homebrew/include')
+
     if get_build_platform() in ('win32', 'win-amd64'):
         include_dirs.append(os.path.join(os.getcwd(), 'include', 'win'))
 
@@ -122,6 +125,9 @@ def get_library_dirs():
     library_dirs.append(os.path.join(sys.prefix, 'lib'))
     if get_build_platform().startswith('freebsd'):
         library_dirs.append('/usr/local/lib')
+
+    if get_build_platform().startswith("macosx"):
+        library_dirs.append('/opt/homebrew/lib')
 
     return library_dirs
 

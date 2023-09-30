@@ -722,7 +722,7 @@ def scheme_functions(scheme):
         raise NotImplementedError(msg)
 
 # Set the cleanup routine
-cdef void _cleanup():
+cdef void _cleanup() noexcept:
     IF HAVE_DOUBLE:
         fftw_cleanup()
     IF HAVE_SINGLE:
@@ -1988,14 +1988,14 @@ cdef class FFTW:
         with nogil:
             fftw_execute(plan, input_pointer, output_pointer)
 
-cdef void count_char(char c, void *counter_ptr):
+cdef void count_char(char c, void *counter_ptr) noexcept:
     '''
     On every call, increment the derefenced counter_ptr.
     '''
     (<int *>counter_ptr)[0] += 1
 
 
-cdef void write_char_to_string(char c, void *string_location_ptr):
+cdef void write_char_to_string(char c, void *string_location_ptr) noexcept:
     '''
     Write the passed character c to the memory location
     pointed to by the contents of string_location_ptr (i.e. a pointer
